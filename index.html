@@ -1,0 +1,252 @@
+--HTML File---
+
+CODE :- 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrandBOX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/scripts.js" defer></script>
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <!-- Animated Moving Banner -->
+  <div class="moving-banner">
+    <div class="moving-banner-track">
+      <span>🔥 Summer Sale: Up to 50% Off!</span>
+      <span>🚚 Free Shipping on Orders Over ₹999</span>
+      <span>🛍️ New Arrivals for Men, Women & Kids</span>
+      <span>🎁 Extra 10% Off on Your First Order</span>
+      <span>🔥 Summer Sale: Up to 50% Off!</span>
+      <span>🚚 Free Shipping on Orders Over ₹999</span>
+      <span>🛍️ New Arrivals for Men, Women & Kids</span>
+      <span>🎁 Extra 10% Off on Your First Order</span>
+    </div>
+  </div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">BrandBOX</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="menDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Men</a>
+            <ul class="dropdown-menu" aria-labelledby="menDropdown" id="menDropdownMenu">
+              <!-- Men products injected by JS -->
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="womenDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Women</a>
+            <ul class="dropdown-menu" aria-labelledby="womenDropdown" id="womenDropdownMenu">
+              <!-- Women products injected by JS -->
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="kidsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Kids</a>
+            <ul class="dropdown-menu" aria-labelledby="kidsDropdown" id="kidsDropdownMenu">
+              <!-- Kids products injected by JS -->
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#" id="ordersBtn">My Orders</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" id="cartBtn" data-bs-toggle="modal" data-bs-target="#cartModal">Cart <span class="badge bg-primary" id="cartCount">0</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="#" id="loginBtn" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Moving Banners (Carousel) -->
+  <section class="hero-section text-center py-5 bg-light">
+    <div class="container">
+      <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1200">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="IMG/celebration-navratri-deity.jpg" class="d-block w-100" style="max-height:340px;object-fit:cover;border-radius:18px;" alt="Summer Sale" loading="lazy">
+            <div class="carousel-overlay"></div>
+            <div class="carousel-caption d-none d-md-block">
+              <h1 class="display-4 fw-bold">Welcome to BrandBOX Fashion</h1>
+              <p class="lead">🔥 Summer Sale: <b>Up to 50% Off</b> on all categories! Refresh your wardrobe today.</p>
+              <a href="#products" class="btn btn-primary btn-lg mt-3">Shop Now</a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="IMG/woman-wearing-stunning-pink-saree.jpg" class="d-block w-100" style="max-height:340px;object-fit:cover;border-radius:18px;" alt="New Arrivals" loading="lazy">
+            <div class="carousel-overlay"></div>
+            <div class="carousel-caption d-none d-md-block">
+              <h1 class="display-4 fw-bold">Unveil the New Arrivals</h1>
+              <p class="lead">🛍️ Discover the latest styles for Men, Women & Kids. Limited stock, grab yours now!</p>
+              <a href="#products" class="btn btn-success btn-lg mt-3">Shop Now</a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="IMG/child-with-jeans-white-sneakers.jpg" class="d-block w-100" style="max-height:340px;object-fit:cover;border-radius:18px;" alt="Free Shipping" loading="lazy">
+            <div class="carousel-overlay"></div>
+            <div class="carousel-caption d-none d-md-block">
+              <h1 class="display-4 fw-bold">Kids' Fashion Fiesta</h1>
+              <p class="lead">👦👧 Trendy, comfy, and playful outfits for your little ones. Free shipping over ₹999!</p>
+              <a href="#products" class="btn btn-warning btn-lg mt-3">Shop Now</a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="IMG/bag-hanging-from-furniture-item-indoors.jpg" class="d-block w-100" style="max-height:340px;object-fit:cover;border-radius:18px;" alt="Trendy Bags" loading="lazy">
+            <div class="carousel-overlay"></div>
+            <div class="carousel-caption d-none d-md-block">
+              <h1 class="display-4 fw-bold">Accessorize Your Style</h1>
+              <p class="lead">👜 Complete your look with our chic bags & accessories. Style delivered to your door.</p>
+              <a href="#products" class="btn btn-info btn-lg mt-3">Shop Now</a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="IMG/fashion-woman-with-clothes.jpg" class="d-block w-100" style="max-height:340px;object-fit:cover;border-radius:18px;" alt="Fashion Woman" loading="lazy">
+            <div class="carousel-overlay"></div>
+            <div class="carousel-caption d-none d-md-block">
+              <h1 class="display-4 fw-bold">Unleash Your Fashion</h1>
+              <p class="lead">👗 Exclusive styles for every occasion. Express yourself with BrandBOX!</p>
+              <a href="#products" class="btn btn-danger btn-lg mt-3">Shop Now</a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="IMG/handsome-young-businessman-sunglasses-walking-street-he-holds-hands-pockets.jpg" class="d-block w-100" style="max-height:340px;object-fit:cover;border-radius:18px;" alt="Men's Fashion" loading="lazy">
+            <div class="carousel-overlay"></div>
+            <div class="carousel-caption d-none d-md-block">
+              <h1 class="display-4 fw-bold">Men's Urban Collection</h1>
+              <p class="lead">🕶️ Step out in style. Urban, bold, and made for you. Shop the latest for men!</p>
+              <a href="#products" class="btn btn-dark btn-lg mt-3">Shop Now</a>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+  <!-- Wavy Divider -->
+  <svg class="section-divider" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="url(#dividerGradient)" fill-opacity="1" d="M0,32 C360,64 1080,0 1440,32 L1440,48 L0,48 Z"></path><defs><linearGradient id="dividerGradient" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#22d3ee"/><stop offset="1" stop-color="#a3e635"/></linearGradient></defs></svg>
+
+  <!-- Categories Filter -->
+  <section class="container my-4">
+    <div class="d-flex justify-content-center gap-3">
+      <button class="btn btn-outline-primary category-btn active" data-category="all">All</button>
+      <button class="btn btn-outline-primary category-btn" data-category="men">Men</button>
+      <button class="btn btn-outline-primary category-btn" data-category="women">Women</button>
+      <button class="btn btn-outline-primary category-btn" data-category="kids">Kids</button>
+    </div>
+  </section>
+
+  <!-- Product Grid -->
+  <section class="container" id="products">
+    <div class="row" id="productGrid">
+      <!-- Products will be injected by JS -->
+    </div>
+  </section>
+
+  <!-- Cart Modal -->
+  <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cartModalLabel">Your Cart</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="cartItems">
+          <!-- Cart items will be injected by JS -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="checkoutBtn">Checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Details Modal -->
+  <div class="modal fade" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productDetailsLabel">Product Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="productDetailsBody">
+          <!-- Product details will be injected by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login/Signup Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Account</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="nav nav-tabs mb-3" id="authTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#loginTabPane" type="button" role="tab" aria-controls="loginTabPane" aria-selected="true">Login</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signupTabPane" type="button" role="tab" aria-controls="signupTabPane" aria-selected="false">Sign Up</button>
+            </li>
+          </ul>
+          <div class="tab-content" id="authTabContent">
+            <div class="tab-pane fade show active" id="loginTabPane" role="tabpanel" aria-labelledby="login-tab">
+              <form id="loginForm">
+                <div class="mb-3">
+                  <label for="loginEmail" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="loginEmail" required>
+                </div>
+                <div class="mb-3">
+                  <label for="loginPassword" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+              </form>
+            </div>
+            <div class="tab-pane fade" id="signupTabPane" role="tabpanel" aria-labelledby="signup-tab">
+              <form id="signupForm">
+                <div class="mb-3">
+                  <label for="signupEmail" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="signupEmail" required>
+                </div>
+                <div class="mb-3">
+                  <label for="signupPassword" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="signupPassword" required>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Sign Up</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3 mt-5">
+    <div class="container">
+      <small>&copy;BrandBOX Clone Shop. All rights reserved.</small>
+    </div>
+  </footer>
+</body>
+</html> 
