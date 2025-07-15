@@ -1,0 +1,441 @@
+---- SCRIPT FILE ---
+
+
+CODE :- 
+
+// Sample product data
+const productImages = [
+  'img/product1.jpg',
+  'img/product2.jpg',
+  'img/product3.jpg',
+  'img/product4.jpg'
+];
+const products = [
+  {id: 1, name: 'Men Navy Blue Shirt', price: 799, category: 'men', img: 'img/handsome-young-businessman-sunglasses-walking-street-he-holds-hands-pockets.jpg'},
+  {id: 2, name: 'Women Red Dress', price: 1299, category: 'women', img: 'img/celebration-navratri-deity.jpg'},
+  {id: 3, name: 'Kids Yellow T-shirt', price: 499, category: 'kids', img: 'IMG/front-view-boy-covering-his-face-with-t-shirt.jpg'},
+  {id: 4, name: 'Men Black Jeans', price: 999, category: 'men', img: 'img/full-length-portrait-young-smiling-african-man.jpg'},
+  {id: 5, name: 'Women Blue Kurti', price: 899, category: 'women', img: 'IMG/close-up-hands-woman-wearing-traditional-sari-garment.jpg'},
+  {id: 6, name: 'Kids Green Shorts', price: 399, category: 'kids', img: 'img/GreenShorts.jpg'},
+  {id: 7, name: 'Men White Sneakers', price: 1499, category: 'men', img: 'img/child-with-jeans-white-sneakers.jpg'},
+  {id: 8, name: 'Women Black Handbag', price: 1599, category: 'women', img: 'img/bag-hanging-from-furniture-item-indoors.jpg'},
+  {id: 9, name: 'Kids Blue Jeans', price: 599, category: 'kids', img: 'img/low-angle-little-boy-posing.jpg'},
+  {id: 10, name: 'Men Olive Jacket', price: 1899, category: 'men', img: 'img/yi-sk-sxZeyJHpKeM-unsplash.jpg'},
+  {id: 11, name: 'Women Pink Saree', price: 2499, category: 'women', img: 'img/woman-wearing-stunning-pink-saree.jpg'},
+  {id: 12, name: 'Kids Red Dress', price: 699, category: 'kids', img: 'img/playful-energetic-little-girl-posing-studio.jpg'},
+  {id: 13, name: 'Men Grey Polo T-shirt', price: 599, category: 'men', img: 'img/maria-kovalets-fRYiPM3mNXQ-unsplash.jpg'},
+  {id: 14, name: 'Men Checked Casual Shirt', price: 899, category: 'men', img: 'img/yap-Kvu8S9HlvcA-unsplash.jpg'},
+  {id: 15, name: 'Men Slim Fit Blue Jeans', price: 1099, category: 'men', img: 'img/tuananh-blue-995tHu6ot2k-unsplash.jpg'},
+  {id: 16, name: 'Men Black Leather Jacket', price: 2499, category: 'men', img: 'img/jacket-2821961_1280.jpg'},
+  {id: 17, name: 'Men White Graphic T-shirt', price: 499, category: 'men', img: 'img/shirt-2619788_1280.jpg'},
+  {id: 18, name: 'Men Brown Formal Shoes', price: 1299, category: 'men', img: 'img/oxford-shoes-6078951_1280.jpg'},
+  {id: 19, name: 'Men Navy Blue Blazer', price: 2799, category: 'men', img: 'img/man-5688155_1280.jpg'},
+  {id: 20, name: 'Men Olive Cargo Pants', price: 899, category: 'men', img: productImages[3]},
+];
+
+let cart = [];
+
+function renderProducts(category = 'all') {
+  const filtered = category === 'all' ? products : products.filter(p => p.category === category);
+  const grid = $('#productGrid');
+  grid.empty();
+  if (filtered.length === 0) {
+    grid.append('<div class="col-12 text-center py-5">No products found.</div>');
+    return;
+  }
+  filtered.forEach((product, i) => {
+    grid.append(`
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+        <div class="card product-card h-100" data-id="${product.id}" data-index="${i}" style="--i:${i}">
+          <img src="${product.img}" class="product-img" alt="${product.name}" loading="lazy">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">${product.name}</h5>
+            <p class="card-text price">₹${product.price}</p>
+            <button class="btn btn-primary mt-auto add-to-cart" data-id="${product.id}">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    `);
+  });
+  // Animate product cards with CSS delay
+  setTimeout(() => {
+    $('.product-card').addClass('animated');
+  }, 50);
+}
+
+function updateCartCount() {
+  $('#cartCount').text(cart.length);
+}
+
+function renderCart() {
+  const cartItems = $('#cartItems');
+  if (cart.length === 0) {
+    cartItems.html('<p>Your cart is empty.</p>');
+    return;
+  }
+  let total = 0;
+  let html = '<ul class="list-group mb-3">';
+  cart.forEach(item => {
+    html += `<li class="list-group-item d-flex justify-content-between align-items-center">
+      <span>${item.name}</span>
+      <span>₹${item.price}</span>
+      <button class="btn btn-sm btn-danger remove-from-cart" data-id="${item.id}">&times;</button>
+    </li>`;
+    total += item.price;
+  });
+  html += '</ul>';
+  html += `<div class="d-flex justify-content-between fw-bold mb-2"><span>Total:</span><span>₹${total}</span></div>`;
+  cartItems.html(html);
+}
+
+// Product descriptions (for details modal)
+const productDescriptions = {
+  1: 'Classic navy blue shirt for men. Perfect for formal and casual occasions.',
+  2: 'Elegant red dress for women. Stand out at any event.',
+  3: 'Bright yellow t-shirt for kids. Comfortable and fun!',
+  4: 'Trendy black jeans for men. Slim fit and stylish.',
+  5: 'Beautiful blue kurti for women. Ethnic and modern.',
+  6: 'Green shorts for kids. Great for playtime.',
+  7: 'White sneakers for men. Sporty and comfortable.',
+  8: 'Black handbag for women. Spacious and chic.',
+  9: 'Blue jeans for kids. Durable and cool.',
+ 10: 'Olive jacket for men. Warm and fashionable.',
+ 11: 'Pink saree for women. Traditional with a modern touch.',
+ 12: 'Red dress for kids. Cute and comfy.'
+};
+
+// Product Details Modal
+$('#productGrid').on('click', '.product-card', function(e) {
+  // Prevent click on Add to Cart from opening modal
+  if ($(e.target).hasClass('add-to-cart')) return;
+  const id = $(this).find('.add-to-cart').data('id');
+  const product = products.find(p => p.id === id);
+  if (product) {
+    const desc = productDescriptions[product.id] || '';
+    $('#productDetailsBody').html(`
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <img src="${product.img}" class="img-fluid rounded mb-3" style="max-height:340px;object-fit:cover;" loading="lazy">
+        </div>
+        <div class="col-md-6">
+          <h3>${product.name}</h3>
+          <p class="text-primary fw-bold fs-5">₹${product.price}</p>
+          <p>${desc}</p>
+          <button class="btn btn-primary add-to-cart-details" data-id="${product.id}">Add to Cart</button>
+        </div>
+      </div>
+    `);
+    const modal = new bootstrap.Modal(document.getElementById('productDetailsModal'));
+    modal.show();
+  }
+});
+
+// Add to cart from details modal
+$('#productDetailsBody').on('click', '.add-to-cart-details', function() {
+  const id = $(this).data('id');
+  const product = products.find(p => p.id === id);
+  if (product) {
+    cart.push(product);
+    updateCartCount();
+    animateCartBadge();
+    alert('Added to cart!');
+  }
+});
+
+// Make product card clickable (except Add to Cart button)
+$('#productGrid').on('mouseenter', '.product-card', function() {
+  $(this).css('cursor', 'pointer');
+});
+
+// Login/Signup logic
+function updateUserUI() {
+  const user = localStorage.getItem('ajioUser');
+  if (user) {
+    $('#loginBtn').text(JSON.parse(user).email).removeAttr('data-bs-toggle').removeAttr('data-bs-target');
+  } else {
+    $('#loginBtn').text('Login').attr('data-bs-toggle', 'modal').attr('data-bs-target', '#loginModal');
+  }
+}
+
+// Helper: get users from localStorage
+function getUsers() {
+  return JSON.parse(localStorage.getItem('ajioUsers') || '{}');
+}
+// Helper: save users to localStorage
+function saveUsers(users) {
+  localStorage.setItem('ajioUsers', JSON.stringify(users));
+}
+
+// Signup logic
+$('#signupForm').submit(function(e) {
+  e.preventDefault();
+  const email = $('#signupEmail').val().trim().toLowerCase();
+  const password = $('#signupPassword').val();
+  if (!email || !password) return;
+  let users = getUsers();
+  if (users[email]) {
+    alert('User already exists. Please login.');
+    return;
+  }
+  users[email] = { password };
+  saveUsers(users);
+  localStorage.setItem('ajioUser', JSON.stringify({ email }));
+  updateUserUI();
+  $('#loginModal').modal('hide');
+  alert('Signup successful! Logged in as ' + email);
+});
+
+// Login logic
+$('#loginForm').submit(function(e) {
+  e.preventDefault();
+  const email = $('#loginEmail').val().trim().toLowerCase();
+  const password = $('#loginPassword').val();
+  let users = getUsers();
+  if (!users[email] || users[email].password !== password) {
+    alert('Invalid email or password.');
+    return;
+  }
+  localStorage.setItem('ajioUser', JSON.stringify({ email }));
+  updateUserUI();
+  $('#loginModal').modal('hide');
+  alert('Logged in as ' + email);
+});
+
+// Save order to localStorage
+function saveOrder(cart) {
+  const user = JSON.parse(localStorage.getItem('ajioUser') || '{}');
+  if (!user.email) return;
+  const ordersKey = 'ajioOrders_' + user.email;
+  const orders = JSON.parse(localStorage.getItem(ordersKey) || '[]');
+  // Generate unique order number
+  let lastOrderNum = parseInt(localStorage.getItem('ajioLastOrderNum') || '1000', 10);
+  lastOrderNum++;
+  localStorage.setItem('ajioLastOrderNum', lastOrderNum);
+  orders.push({
+    orderNum: lastOrderNum,
+    date: new Date().toLocaleString(),
+    items: cart
+  });
+  localStorage.setItem(ordersKey, JSON.stringify(orders));
+}
+
+// Render order history with delete
+function renderOrders() {
+  const user = JSON.parse(localStorage.getItem('ajioUser') || '{}');
+  const ordersKey = 'ajioOrders_' + user.email;
+  const orders = JSON.parse(localStorage.getItem(ordersKey) || '[]');
+  const ordersBody = $('#ordersBody');
+  if (!user.email) {
+    ordersBody.html('<p class="text-danger">Please login to view your orders.</p>');
+    return;
+  }
+  if (orders.length === 0) {
+    ordersBody.html('<p>No orders found.</p>');
+    return;
+  }
+  let html = '';
+  orders.slice().reverse().forEach((order, idx) => {
+    html += `<div class="mb-4 border rounded p-3 order-block" data-order-num="${order.orderNum}">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="fw-bold">Order #${order.orderNum} <span class="text-muted small">(${order.date})</span></div>
+        <button class="btn btn-sm btn-outline-danger delete-order-btn" data-order-num="${order.orderNum}">Delete</button>
+      </div>
+      <ul class="list-group">`;
+    order.items.forEach(item => {
+      html += `<li class="list-group-item d-flex align-items-center">
+        <img src="${item.img}" alt="${item.name}" style="width:48px;height:48px;object-fit:cover;border-radius:6px;margin-right:12px;border:1px solid #eee;">
+        <span class="flex-grow-1">${item.name}</span>
+        <span class="fw-bold text-primary">₹${item.price}</span>
+      </li>`;
+    });
+    html += '</ul></div>';
+  });
+  ordersBody.html(html);
+  // Animate order history items
+  setTimeout(() => {
+    $('#ordersBody > div').each(function(i) {
+      setTimeout(() => { $(this).addClass('animated'); }, i * 120);
+    });
+  }, 50);
+}
+
+// Delete order handler
+$('#ordersBody').on('click', '.delete-order-btn', function() {
+  const orderNum = $(this).data('order-num');
+  const user = JSON.parse(localStorage.getItem('ajioUser') || '{}');
+  const ordersKey = 'ajioOrders_' + user.email;
+  let orders = JSON.parse(localStorage.getItem(ordersKey) || '[]');
+  orders = orders.filter(order => order.orderNum !== orderNum);
+  localStorage.setItem(ordersKey, JSON.stringify(orders));
+  renderOrders();
+});
+
+// Show order history modal
+$('#ordersBtn').click(function(e) {
+  e.preventDefault();
+  renderOrders();
+  const modal = new bootstrap.Modal(document.getElementById('ordersModal'));
+  modal.show();
+});
+
+function animateCartBadge() {
+  const badge = $('#cartCount');
+  badge.addClass('cart-bounce');
+  setTimeout(() => badge.removeClass('cart-bounce'), 500);
+}
+
+// Update add-to-cart actions to animate cart badge
+$('#productGrid').on('click', '.add-to-cart', function() {
+  const id = $(this).data('id');
+  const product = products.find(p => p.id === id);
+  if (product) {
+    cart.push(product);
+    updateCartCount();
+    animateCartBadge();
+  }
+});
+
+$('#productDetailsBody').on('click', '.add-to-cart-details', function() {
+  const id = $(this).data('id');
+  const product = products.find(p => p.id === id);
+  if (product) {
+    cart.push(product);
+    updateCartCount();
+    animateCartBadge();
+    alert('Added to cart!');
+  }
+});
+
+// Remove from cart
+$('#cartItems').on('click', '.remove-from-cart', function() {
+  const id = $(this).data('id');
+  cart = cart.filter(item => item.id !== id);
+  renderCart();
+  updateCartCount();
+});
+
+// Fade-in for modals
+$('.modal').on('show.bs.modal', function () {
+  $(this).find('.modal-dialog').css({opacity: 0, transform: 'scale(0.96)'});
+  setTimeout(() => {
+    $(this).find('.modal-dialog').css({transition: 'all 0.3s', opacity: 1, transform: 'scale(1)'});
+  }, 10);
+});
+$('.modal').on('hidden.bs.modal', function () {
+  $(this).find('.modal-dialog').css({transition: '', opacity: '', transform: ''});
+});
+
+// Move focus to a safe element when productDetailsModal is hidden
+$('#productDetailsModal').on('hidden.bs.modal', function () {
+  // Focus the first category button or fallback to body
+  const btn = document.querySelector('.category-btn');
+  if (btn) {
+    btn.focus();
+  } else {
+    document.body.focus();
+  }
+});
+
+function injectNavbarDropdowns() {
+  // Helper to get featured products by category
+  function getFeatured(category) {
+    return products.filter(p => p.category === category).slice(0, 4);
+  }
+  // Men
+  const men = getFeatured('men');
+  $('#menDropdownMenu').html(men.map(p => `
+    <li>
+      <a class="dropdown-item d-flex align-items-center navbar-product-link" href="#" data-id="${p.id}">
+        <img src="${p.img}" alt="${p.name}" style="width:36px;height:36px;object-fit:cover;border-radius:5px;margin-right:10px;">
+        <span>${p.name}</span>
+      </a>
+    </li>
+  `).join(''));
+  // Women
+  const women = getFeatured('women');
+  $('#womenDropdownMenu').html(women.map(p => `
+    <li>
+      <a class="dropdown-item d-flex align-items-center navbar-product-link" href="#" data-id="${p.id}">
+        <img src="${p.img}" alt="${p.name}" style="width:36px;height:36px;object-fit:cover;border-radius:5px;margin-right:10px;">
+        <span>${p.name}</span>
+      </a>
+    </li>
+  `).join(''));
+  // Kids
+  const kids = getFeatured('kids');
+  $('#kidsDropdownMenu').html(kids.map(p => `
+    <li>
+      <a class="dropdown-item d-flex align-items-center navbar-product-link" href="#" data-id="${p.id}">
+        <img src="${p.img}" alt="${p.name}" style="width:36px;height:36px;object-fit:cover;border-radius:5px;margin-right:10px;">
+        <span>${p.name}</span>
+      </a>
+    </li>
+  `).join(''));
+}
+
+// Open product details modal from navbar dropdown
+$(document).on('click', '.navbar-product-link', function(e) {
+  e.preventDefault();
+  const id = $(this).data('id');
+  const product = products.find(p => p.id === id);
+  if (product) {
+    const desc = productDescriptions[product.id] || '';
+    $('#productDetailsBody').html(`
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <img src="${product.img}" class="img-fluid rounded mb-3" style="max-height:340px;object-fit:cover;" loading="lazy">
+        </div>
+        <div class="col-md-6">
+          <h3>${product.name}</h3>
+          <p class="text-primary fw-bold fs-5">₹${product.price}</p>
+          <p>${desc}</p>
+          <button class="btn btn-primary add-to-cart-details" data-id="${product.id}">Add to Cart</button>
+        </div>
+      </div>
+    `);
+    const modal = new bootstrap.Modal(document.getElementById('productDetailsModal'));
+    modal.show();
+  }
+});
+
+$(document).ready(function() {
+  // Initial render
+  renderProducts();
+  updateCartCount();
+
+  // Category filter
+  $('.category-btn').click(function() {
+    $('.category-btn').removeClass('active');
+    $(this).addClass('active');
+    const category = $(this).data('category');
+    renderProducts(category);
+  });
+
+  // Show cart modal
+  $('#cartBtn').click(function() {
+    renderCart();
+  });
+
+  // Checkout
+  $('#checkoutBtn').click(function() {
+    if (cart.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
+    saveOrder(cart);
+    alert('Thank you for shopping with us!');
+    cart = [];
+    renderCart();
+    updateCartCount();
+    $('#cartModal').modal('hide');
+  });
+
+  updateUserUI();
+
+  // My Orders (future)
+  $('#ordersBtn').click(function() {
+    alert('Order history feature coming soon!');
+  });
+
+  injectNavbarDropdowns();
+}); 
