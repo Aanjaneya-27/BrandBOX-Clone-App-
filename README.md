@@ -14,23 +14,11 @@
 - 📦 Product Listing with Detail View
 - 📱 Fully Responsive UI
 
- 📸 Screenshots
-
-> *(Add screenshots here, e.g.:)*
-
-- Home Page  
-- Product Detail Page  
-- Cart Page  
-- Login/Register Page  
-
-
-🎯 Project Purpose
+ 🎯 Project Purpose
 
 
 📦 Future Enhancements
 ✅ Product Search & Filters
-
 📝 Product Reviews & Ratings
-
 🧾 Order History 
 
