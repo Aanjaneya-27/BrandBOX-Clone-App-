@@ -5,7 +5,7 @@
  🧰 Tech Stack
 
 - Frontend: HTML, CSS, JavaScript
-- Tools & Others: Visual Studio Code, Postman
+- Tools & Others: Visual Studio Code
 
  🔑 Features
 
