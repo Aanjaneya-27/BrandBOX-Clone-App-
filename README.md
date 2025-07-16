@@ -1,6 +1,6 @@
 🛍️ BrandBOX – E-Commerce Clone Shopping App
 
-**BrandBOX** is a full-stack e-commerce web application that mimics the functionality and design of a modern online shopping platform. It allows users to register, browse products, manage their shopping cart, and enjoy a smooth, intuitive shopping experience.
+**BrandBOX** is a e-commerce web application that mimics the functionality and design of a modern online shopping platform. It allows users to register, browse products, manage their shopping cart, and enjoy a smooth, intuitive shopping experience.
 
  🧰 Tech Stack
 
